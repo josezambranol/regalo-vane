@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#05020a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Para Liz Vanesa // 14 de Octubre</title>
+    <!-- Google Fonts: Modern Gamer & Clean Aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================
+           PALETA AESTHETIC GAMER (PURPLE, PINK & OBSIDIAN)
+           ========================================================== */
+        :root {
+            --bg-void: #05020a;
+            --purple-card: #120720;
+            --purple-border: #6d28d9;
+            --purple-glow: rgba(139, 92, 246, 0.35);
+            --pink-accent: #f43f5e;
+            --pink-glow: #fb7185;
+            --pink-soft: #f472b6;
+            --gold-accent: #fbbf24;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-gothic: 'Cinzel', serif;
+            /* Aliases para compatibilidad */
+            --font-pixel: var(--font-title);
+            --font-game: var(--font-body);
+            --font-clean: var(--font-body);
+        }
+
+        /* Scrollbars elegantes, ultra delgadas e invisibles para toda la app */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 10px;
+            transition: background 0.2s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--pink-soft);
+        }
+
+        ::-webkit-scrollbar-button {
+            display: none !important;
+            width: 0;
+            height: 0;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Scanlines sutiles */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            background: linear-gradient(rgba(18, 10, 30, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            opacity: 0.55;
+        }
+
+        /* Gabinete Principal */
+        .main-frame {
+            position: relative;
+            z-index: 10;
+            width: 96vw;
+            max-width: 1140px;
+            height: 94vh;
+            max-height: 780px;
+            background: var(--purple-card);
+            border: 2px solid var(--purple-border);
+            border-radius: 16px;
+            box-shadow: 0 0 40px var(--purple-glow), inset 0 0 30px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Botón Flotante de Audio */
+        .floating-audio-btn {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            z-index: 60;
+            background: rgba(22, 10, 38, 0.88);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--purple-border);
+            color: var(--pink-soft);
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 7px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-audio-btn:hover {
+            background: var(--pink-soft);
+            color: #0b0416;
+            border-color: var(--pink-soft);
+            box-shadow: 0 0 16px var(--pink-glow);
+            transform: translateY(-1px);
+        }
+
+        /* Pantallas del Flujo */
+        .stage-view {
+            flex: 1;
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage-view.active {
+            display: flex;
+        }
+
+        /* ==========================================================
+           1. SECUENCIA MISTERIOSA DE ENTRADA (SPOOKY OCTOBER DARK)
+           ========================================================== */
+        #stage-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            background: #030107;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            overflow: hidden;
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        #stage-intro.dismissed {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
+        }
+
+        /* Telarañas en las esquinas */
+        .cobweb {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.55;
+            filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.4));
+        }
+
+        .cobweb-tl { top: 0; left: 0; }
+        .cobweb-tr { top: 0; right: 0; }
+
+        /* Fondo de Octubre: Luna Llena y Silueta de Mansión */
+        .spooky-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .october-moon {
+            position: absolute;
+            top: 6%;
+            right: 15%;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #faf5ff 10%, #e9d5ff 45%, #9333ea 90%, transparent 100%);
+            box-shadow: 0 0 50px rgba(192, 132, 252, 0.5), 0 0 100px rgba(147, 51, 234, 0.35);
+            opacity: 0.85;
+            animation: moonPulse 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes moonPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4)); }
+            100% { transform: scale(1.04); filter: drop-shadow(0 0 35px rgba(236, 72, 153, 0.5)); }
+        }
+
+        .bats-cluster {
+            position: absolute;
+            top: 12%;
+            right: 28%;
+            display: flex;
+            gap: 24px;
+            font-size: 1.8rem;
+            animation: batsFloat 4s ease-in-out infinite alternate;
+        }
+
+        .bat-1 { transform: translateY(-4px) rotate(-10deg); }
+        .bat-2 { transform: translateY(6px) scale(0.8) rotate(15deg); }
+        .bat-3 { transform: translateY(-8px) scale(1.1); }
+
+        @keyframes batsFloat {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-15px, 10px); }
+        }
+
+        .haunted-scenery {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 240px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .haunted-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .creeping-fog {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 140px;
+            background: linear-gradient(to top, rgba(9, 4, 15, 0.95), rgba(76, 29, 149, 0.2), transparent);
+            animation: fogDrift 20s linear infinite alternate;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes fogDrift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
+        }
+
+        /* Tarjeta de Terminal Misterioso */
+        .terminal-box {
+            background: rgba(14, 6, 25, 0.94);
+            backdrop-filter: blur(14px);
+            border: 2px solid #7c3aed;
+            border-radius: 18px;
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.4), inset 0 0 30px rgba(0, 0, 0, 0.8);
+            width: 100%;
+            max-width: 650px;
+            padding: 34px 38px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-title);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: var(--pink-soft);
+            border-bottom: 1px dashed rgba(168, 85, 247, 0.4);
+            padding-bottom: 10px;
+        }
+
+        .terminal-text {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            line-height: 1.65;
+            font-weight: 500;
+            color: var(--text-main);
+            min-height: 95px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: pre-line;
+        }
+
+        .terminal-text span.cursor {
+            display: inline-block;
+            width: 8px;
+            height: 22px;
+            background: var(--pink-soft);
+            margin-left: 6px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .terminal-btn {
+            background: linear-gradient(135deg, #7c3aed, #db2777);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(219, 39, 119, 0.45);
+            transition: all 0.25s ease;
+            align-self: center;
+        }
+
+        .terminal-btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 28px rgba(219, 39, 119, 0.7);
+        }
+
+        /* ==========================================================
+           2. MENÚ DE DOS PARTES
+           ========================================================== */
+        #stage-menu {
+            flex-direction: row;
+        }
+
+        .menu-left-col {
+            width: 52%;
+            background: #110820;
+            border-right: 2px solid var(--purple-border);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            gap: 14px;
+        }
+
+        .section-pill-tag {
+            font-family: var(--font-title);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid;
+        }
+
+        .section-pill-tag.part1 {
+            background: #210d38;
+            border-color: #8b5cf6;
+            color: #c084fc;
+        }
+
+        .section-pill-tag.part2 {
+            background: #2a0b22;
+            border-color: var(--pink-accent);
+            color: var(--pink-soft);
+        }
+
+        .quest-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quest-card {
+            background: #190d2e;
+            border: 1px solid #3b1d63;
+            border-radius: 10px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quest-card:hover, .quest-card.active {
+            background: #29124a;
+            border-color: var(--pink-soft);
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+            transform: translateX(4px);
+        }
+
+        .quest-card.sober-card {
+            background: #1a091c;
+            border-color: #5c143d;
+        }
+
+        .quest-card.sober-card:hover, .quest-card.sober-card.active {
+            background: #2f0e27;
+            border-color: var(--pink-accent);
+        }
+
+        .q-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .q-sub {
+            font-family: var(--font-title);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+        }
+
+        .q-title {
+            font-family: var(--font-title);
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--text-main);
+            letter-spacing: 0.3px;
+        }
+
+        .q-badge {
+            font-family: var(--font-title);
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #8b5cf6;
+            color: #c084fc;
+            background: #130a24;
+            white-space: nowrap;
+        }
+
+        .q-badge.fav {
+            border-color: var(--gold-accent);
+            color: #000;
+            background: var(--gold-accent);
+            font-weight: 700;
+        }
+
+        .q-badge.sober {
+            border-color: var(--pink-accent);
+            color: var(--pink-accent);
+            background: #200717;
+        }
+
+        /* Columna Derecha: Vista Previa */
+        .menu-right-col {
+            width: 48%;
+            background: #090412;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .mobile-preview-close {
+            display: none !important;
+        }
+
+        .preview-pane {
+            background: #140924;
+            border: 2px solid var(--purple-border);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: 36px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .preview-top {
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--pink-soft);
+            border-bottom: 1px dashed var(--purple-border);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-badge-status {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--purple-border);
+            background: #1e0f36;
+        }
+
+        .preview-img-box {
+            width: 100%;
+            height: 310px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(139, 92, 246, 0.25);
+            background: #000;
+            position: relative;
+            margin: 12px 0;
+        }
+
+        .preview-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sober-preview-screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #24081c 0%, #0d0312 90%);
+            border: 1px solid var(--pink-accent);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sober-preview-screen.active {
+            display: flex;
+        }
+
+        .sober-lock-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 16px var(--pink-accent));
+        }
+
+        .sober-title {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--pink-soft);
+            background: #2b0821;
+            border: 1px solid var(--pink-accent);
+            padding: 6px 16px;
+            border-radius: 8px;
+            letter-spacing: 0.8px;
+        }
+
+        .sober-sub {
+            font-family: var(--font-body);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .preview-bottom-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preview-reward-tag {
+            background: #1c0a2e;
+            border: 1px solid #4c1d95;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-family: var(--font-title);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            text-align: center;
+        }
+
+        .open-chapter-btn {
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            padding: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(236, 72, 153, 0.45);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .open-chapter-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 25px rgba(236, 72, 153, 0.65);
+        }
+
+        /* ==========================================================
+           3. INTERIOR DEL CAPÍTULO (ESCENARIO COMPLETO)
+           ========================================================== */
+        #stage-chapter {
+            flex-direction: column;
+            background: #10061e;
+        }
+
+        .chapter-header-bar {
+            background: #0c0517;
+            border-bottom: 2px solid var(--purple-border);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .back-nav-btn {
+            background: #25103d;
+            border: 1px solid var(--pink-soft);
+            color: var(--pink-soft);
+            font-family: var(--font-title);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .back-nav-btn:hover {
+            background: var(--pink-soft);
+            color: #000;
+        }
+
+        .chapter-title-tag {
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--gold-accent);
+        }
+
+        .chapter-body {
+            flex: 1;
+            padding: 22px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rpg-bubble-card {
+            background: #170b2b;
+            border: 2px solid var(--purple-border);
+            border-radius: 14px;
+            padding: 22px 26px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .rpg-bubble-speaker {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #391361;
+            border: 1px solid var(--pink-soft);
+            color: var(--pink-soft);
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .rpg-bubble-text {
+            font-family: var(--font-body);
+            font-size: 1.12rem;
+            line-height: 1.7;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-top: 6px;
+        }
+
+        /* Casillas de Inventario */
+        .inv-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+            gap: 12px;
+            background: #0b0416;
+            border: 2px solid var(--purple-border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .inv-card-slot {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #1e0e36;
+            border: 2px solid #4a1e78;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            padding: 6px;
+            overflow: hidden;
+        }
+
+        .inv-card-slot:hover, .inv-card-slot.active {
+            background: #38155e;
+            border-color: var(--pink-soft);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
+        }
+
+        .inv-card-slot img {
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .inv-card-slot .slot-emoji {
+            font-size: 2rem;
+        }
+
+        .inv-card-slot .slot-name {
+            font-family: var(--font-title);
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--pink-soft);
+            margin-top: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+        }
+
+        .slot-stars {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            font-family: var(--font-title);
+            font-size: 0.65rem;
+            color: var(--gold-accent);
+        }
+
+        .inspect-card-box {
+            background: #150926;
+            border: 2px solid var(--pink-soft);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+        }
+
+        .inspect-card-box img {
+            width: 140px;
+            height: 140px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        .inspect-info {
+            flex: 1;
+        }
+
+        .inspect-title {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--pink-soft);
+            margin-bottom: 8px;
+        }
+
+        .inspect-story {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        /* Galería Fotográfica y Videos */
+        .media-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .media-item-card {
+            background: #160a29;
+            border: 2px solid var(--purple-border);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .media-item-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--pink-soft);
+        }
+
+        .media-item-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .media-item-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .media-item-card video {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            background: #000;
+        }
+
+        .media-item-caption {
+            font-family: var(--font-title);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--pink-soft);
+            text-align: center;
+        }
+
+        /* Lightbox para inspeccionar imágenes */
+        .image-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(8, 3, 16, 0.94);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .image-lightbox.active {
+            display: flex;
+        }
+
+        .image-lightbox img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            border: 2px solid var(--purple-border);
+            box-shadow: 0 0 40px var(--purple-glow);
+            object-fit: contain;
+        }
+
+        .image-lightbox-caption {
+            margin-top: 14px;
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--pink-soft);
+            text-align: center;
+        }
+
+        .image-lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            font-family: var(--font-title);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #25092a;
+            border: 1px solid var(--pink-accent);
+            color: var(--pink-soft);
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .image-lightbox-close:hover {
+            background: var(--pink-accent);
+            color: #fff;
+        }
+
+        /* ==========================================================
+           BOTÓN "AL FINAL DE TODO" Y MODAL CELEBRATORIO (GOJO + CONFETI)
+           ========================================================== */
+        .final-surprise-banner-box {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(244, 63, 94, 0.4);
+        }
+
+        .btn-final-surprise {
+            width: 100%;
+            background: linear-gradient(135deg, #e11d48, #9333ea, #db2777);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            padding: 13px 20px;
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(225, 29, 72, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-final-surprise:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 28px rgba(244, 63, 94, 0.75), inset 0 0 16px rgba(255, 255, 255, 0.35);
+            border-color: #fff;
+        }
+
+        /* Modal "AL FINAL DE TODO" */
+        .final-surprise-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .final-surprise-modal.active {
+            display: flex;
+        }
+
+        .final-surprise-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 1, 10, 0.88);
+            backdrop-filter: blur(10px);
+        }
+
+        .final-surprise-card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 440px;
+            background: radial-gradient(circle at top, #2d0a33 0%, #11041c 85%);
+            border: 2px solid var(--pink-soft);
+            border-radius: 20px;
+            padding: 24px 20px;
+            box-shadow: 0 0 50px rgba(244, 63, 94, 0.55), inset 0 0 30px rgba(147, 51, 234, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .final-surprise-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .final-surprise-close:hover {
+            background: var(--pink-accent);
+            transform: rotate(90deg);
+        }
+
+        .final-surprise-img-box {
+            width: 100%;
+            max-width: 280px;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 3px solid var(--pink-soft);
+            box-shadow: 0 0 30px rgba(244, 114, 182, 0.6);
+            margin-bottom: 16px;
+            background: #090312;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .final-surprise-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .final-surprise-img-box:hover img {
+            transform: scale(1.04);
+        }
+
+        .final-surprise-badge {
+            font-family: var(--font-title);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: var(--gold-accent);
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid var(--gold-accent);
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .final-surprise-title {
+            font-family: var(--font-title);
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.8px;
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.8);
+            margin-bottom: 12px;
+        }
+
+        .final-surprise-msg {
+            font-family: var(--font-body);
+            font-size: 1.18rem;
+            line-height: 1.6;
+            color: #fce7f3;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .final-surprise-buttons {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-more-confetti {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-family: var(--font-title);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+            transition: all 0.2s;
+        }
+
+        .btn-more-confetti:hover {
+            transform: scale(1.04);
+        }
+
+        .btn-close-surprise {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e2e8f0;
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-family: var(--font-title);
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-close-surprise:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ==========================================================
+           PISTA DE PERSONAJES ANIMADOS
+           (Cadance, Raven, Beast Boy, Mualani, Xiao)
+           ========================================================== */
+        .sprites-track {
+            height: 52px;
+            background: #090412;
+            border-top: 2px solid var(--purple-border);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            z-index: 25;
+        }
+
+        .floating-sprite {
+            position: absolute;
+            height: 42px;
+            width: auto;
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.4));
+            transition: transform 0.2s;
+        }
+
+        .floating-sprite:hover {
+            transform: scale(1.25) translateY(-4px);
+            filter: drop-shadow(0 0 12px var(--pink-soft));
+        }
+
+        #sprite-cadance { animation: patrol1 24s infinite linear; }
+        #sprite-raven { animation: patrol2 30s infinite linear; }
+        #sprite-beastboy { animation: patrol3 28s infinite linear; }
+        #sprite-mualani { animation: patrol4 34s infinite linear; }
+        #sprite-xiao { animation: patrol5 26s infinite linear; }
+
+        @keyframes patrol1 {
+            0% { left: -60px; transform: scaleX(1); }
+            48% { left: calc(100% - 60px); transform: scaleX(1); }
+            50% { left: calc(100% - 60px); transform: scaleX(-1); }
+            98% { left: -60px; transform: scaleX(-1); }
+            100% { left: -60px; transform: scaleX(1); }
+        }
+
+        @keyframes patrol2 {
+            0% { left: 100%; transform: scaleX(-1); }
+            48% { left: 0%; transform: scaleX(-1); }
+            50% { left: 0%; transform: scaleX(1); }
+            98% { left: 100%; transform: scaleX(1); }
+            100% { left: 100%; transform: scaleX(-1); }
+        }
+
+        @keyframes patrol3 {
+            0% { left: 25%; transform: scaleX(1); }
+            48% { left: 95%; transform: scaleX(1); }
+            50% { left: 95%; transform: scaleX(-1); }
+            98% { left: 5%; transform: scaleX(-1); }
+            100% { left: 25%; transform: scaleX(1); }
+        }
+
+        @keyframes patrol4 {
+            0% { left: 75%; transform: scaleX(-1); }
+            48% { left: 15%; transform: scaleX(-1); }
+            50% { left: 15%; transform: scaleX(1); }
+            98% { left: 85%; transform: scaleX(1); }
+            100% { left: 75%; transform: scaleX(-1); }
+        }
+
+        @keyframes patrol5 {
+            0% { left: 10%; transform: scaleX(1); }
+            50% { left: 80%; transform: scaleX(1); }
+            52% { left: 80%; transform: scaleX(-1); }
+            100% { left: 10%; transform: scaleX(-1); }
+        }
+
+        /* Footer HUD */
+        .game-footer {
+            background: #0a0414;
+            border-top: 1px solid var(--purple-border);
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-dim);
+            font-family: var(--font-title);
+            z-index: 30;
+        }
+
+        .game-footer span {
+            color: var(--pink-soft);
+        }
+
+        /* ==========================================================
+           OPTIMIZACIÓN COMPLETA PARA MÓVILES (TELÉFONOS & TABLETS)
+           ========================================================== */
+        @media (max-width: 768px) {
+            body {
+                overflow: hidden;
+                height: 100dvh;
+                width: 100vw;
+            }
+
+            .main-frame {
+                width: 100vw;
+                height: 100dvh;
+                max-height: 100dvh;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            /* Intro en móvil */
+            #stage-intro {
+                padding: 16px;
+            }
+
+            .terminal-box {
+                padding: 22px 16px;
+                gap: 16px;
+                border-radius: 14px;
+                max-width: 95vw;
+            }
+
+            .terminal-header {
+                font-size: 0.72rem;
+            }
+
+            .terminal-text {
+                font-size: 1.05rem;
+                line-height: 1.55;
+                min-height: 75px;
+            }
+
+            .terminal-btn {
+                width: 100%;
+                padding: 12px 16px;
+                font-size: 0.88rem;
+            }
+
+            .october-moon {
+                width: 85px;
+                height: 85px;
+                top: 3%;
+                right: 8%;
+            }
+
+            .bats-cluster {
+                top: 7%;
+                right: 22%;
+                font-size: 1.3rem;
+                gap: 14px;
+            }
+
+            .cobweb {
+                width: 110px;
+                height: 110px;
+            }
+
+            /* Menú en móvil: lista limpia a pantalla completa */
+            #stage-menu {
+                flex-direction: column;
+                position: relative;
+            }
+
+            .menu-left-col {
+                width: 100%;
+                height: 100%;
+                border-right: none;
+                padding: 14px 12px 65px 12px;
+                overflow-y: auto;
+            }
+
+            /* Columna derecha convertida en Bottom Sheet modal al tocar una carta */
+            .menu-right-col {
+                display: none;
+            }
+
+            .menu-right-col.mobile-active {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100vw;
+                height: auto;
+                max-height: 85vh;
+                z-index: 1000;
+                border-top: 2px solid var(--purple-border);
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.9);
+                padding: 18px 16px 24px 16px;
+                background: #0d051c;
+                animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .mobile-preview-backdrop {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.75);
+                backdrop-filter: blur(4px);
+                z-index: 999;
+            }
+
+            .mobile-preview-backdrop.active {
+                display: block;
+            }
+
+            @keyframes slideUp {
+                0% { transform: translateY(100%); }
+                100% { transform: translateY(0); }
+            }
+
+            .mobile-preview-close {
+                display: none;
+            }
+
+            .menu-right-col.mobile-active .mobile-preview-close {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 12px;
+                right: 14px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                font-size: 1rem;
+                cursor: pointer;
+                z-index: 20;
+            }
+
+            .preview-pane {
+                margin-top: 18px;
+                padding: 14px;
+            }
+
+            .preview-img-box {
+                height: 200px;
+                margin: 10px 0;
+            }
+
+            /* Botón flotante de audio */
+            .floating-audio-btn {
+                top: 10px;
+                right: 12px;
+                padding: 5px 10px;
+                font-size: 0.68rem;
+            }
+
+            /* Capítulos en móvil */
+            .chapter-header-bar {
+                padding: 10px 12px;
+            }
+
+            .back-nav-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .chapter-title-tag {
+                font-size: 0.78rem;
+                max-width: 170px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .chapter-body {
+                padding: 14px 12px 50px 12px;
+                gap: 16px;
+            }
+
+            .rpg-bubble-card {
+                padding: 18px 16px;
+            }
+
+            .rpg-bubble-speaker {
+                font-size: 0.7rem;
+                top: -10px;
+                left: 14px;
+            }
+
+            .rpg-bubble-text {
+                font-size: 1.02rem;
+                line-height: 1.6;
+            }
+
+            /* Galería en móvil (1 columna amplia) */
+            .media-masonry {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .media-item-card img, .media-item-card video {
+                height: 230px;
+            }
+
+            .media-item-caption {
+                font-size: 0.82rem;
+            }
+
+            /* Inventario en móvil */
+            .inv-grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .inv-card-slot .slot-emoji {
+                font-size: 1.6rem;
+            }
+
+            .inv-card-slot .slot-name {
+                font-size: 0.65rem;
+            }
+
+            .inspect-card-box {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+                padding: 14px;
+            }
+
+            .inspect-card-box img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .inspect-title {
+                font-size: 0.95rem;
+            }
+
+            .inspect-story {
+                font-size: 0.95rem;
+            }
+
+            /* Modal final sorpresa en móvil */
+            .final-surprise-card {
+                padding: 22px 18px;
+                max-width: 92vw;
+            }
+
+            .final-surprise-img-box {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 12px;
+            }
+
+            .final-surprise-title {
+                font-size: 1.5rem;
+            }
+
+            .final-surprise-msg {
+                font-size: 1.05rem;
+                margin-bottom: 16px;
+            }
+
+            /* Sprites y Footer */
+            .sprites-track {
+                height: 38px;
+            }
+
+            .floating-sprite {
+                height: 28px;
+            }
+
+            .game-footer {
+                padding: 6px 12px;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio BGM (Arctic Monkeys - Stop The World I Wanna Get Off With You) -->
+    <audio id="bgm" src="assets/musica.mp3" loop preload="auto"></audio>
+
+    <!-- ==============================================================
+         1. SECUENCIA MISTERIOSA DE ENTRADA (SPOOKY OCTOBER DARK)
+         ============================================================== -->
+    <section class="spooky-intro" id="stage-intro">
+        <!-- Telarañas en las esquinas -->
+        <svg class="cobweb cobweb-tl" viewBox="0 0 200 200">
+            <path d="M0,0 L200,0 M0,0 L185,45 M0,0 L145,95 M0,0 L95,145 M0,0 L45,185 M0,0 L0,200
+                     M35,0 Q30,15 0,35 M70,0 Q60,30 0,70 M105,0 Q90,50 0,105 M140,0 Q120,70 0,140 M175,0 Q150,90 0,175 M200,0 Q170,110 0,200" 
+                  stroke="rgba(192, 132, 252, 0.45)" stroke-width="1.3" fill="none"/>
+        </svg>
+        <svg class="cobweb cobweb-tr" viewBox="0 0 200 200">
+            <path d="M200,0 L0,0 M200,0 L15,45 M200,0 L55,95 M200,0 L105,145 M200,0 L155,185 M200,0 L200,200
+                     M165,0 Q170,15 200,35 M130,0 Q140,30 200,70 M95,0 Q110,50 200,105 M60,0 Q80,70 200,140 M25,0 Q50,90 200,175 M0,0 Q30,110 200,200" 
+                  stroke="rgba(192, 132, 252, 0.45)" stroke-width="1.3" fill="none"/>
+        </svg>
+
+        <!-- Fondo de Octubre: Luna, murciélagos y horizonte embrujado -->
+        <div class="spooky-backdrop">
+            <div class="october-moon"></div>
+            <div class="bats-cluster">
+                <span class="bat bat-1">🦇</span>
+                <span class="bat bat-2">🦇</span>
+                <span class="bat bat-3">🦇</span>
+            </div>
+            <div class="haunted-scenery">
+                <svg viewBox="0 0 1200 300" preserveAspectRatio="none" class="haunted-svg">
+                    <path d="M0,300 L0,240 
+                             Q50,230 100,240 L110,210 L115,210 L120,240 
+                             Q180,235 240,240 L250,180 L255,160 L260,180 L265,240
+                             Q340,235 420,240 
+                             L440,240 L450,170 L465,110 L470,80 L475,110 L490,170 L500,240 
+                             L515,240 L530,150 L545,90 L550,60 L555,90 L570,150 L585,240
+                             L600,240 L610,190 L630,130 L635,100 L640,130 L660,190 L670,240
+                             Q750,235 830,240 L840,180 L850,150 L860,180 L870,240
+                             Q950,235 1030,240 L1050,180 L1060,140 L1070,180 L1090,240
+                             Q1140,235 1200,240 L1200,300 Z" 
+                          fill="#06020c"/>
+                    <path d="M140,240 Q150,190 130,150 Q115,130 95,120 Q120,125 145,140 Q160,110 150,80 Q165,105 160,135 Q180,120 205,110 Q180,130 165,155 Q180,195 170,240 Z
+                             M900,240 Q890,185 915,145 Q935,125 960,115 Q935,122 910,138 Q895,105 910,75 Q890,100 895,130 Q870,115 845,105 Q870,128 885,150 Q865,195 880,240 Z"
+                          fill="#040108"/>
+                </svg>
+                <div class="creeping-fog"></div>
+            </div>
+        </div>
+
+        <!-- Caja de Terminal Misterioso -->
+        <div class="terminal-box spooky-card">
+            <div class="terminal-header">
+                <span>🎃 ACCESO RESTRINGIDO // NOCHE DE OCTUBRE</span>
+                <span id="stepCounter">[01/04]</span>
+            </div>
+            
+            <div class="terminal-text" id="introQuestionBox">
+                <span id="introTypewriter">...¿Quién anda ahí?<br>¿Qué estás buscando en esta noche de octubre?</span>
+                <span class="cursor"></span>
+            </div>
+
+            <button class="terminal-btn spooky-btn" id="btnIntroAction">
+                Solo estaba curioseando...
+            </button>
+        </div>
+    </section>
+
+    <!-- Gabinete Principal -->
+    <main class="main-frame">
+
+        <!-- ==============================================================
+             2. MENÚ EN DOS PARTES
+             ============================================================== -->
+        <section class="stage-view active" id="stage-menu">
+            
+            <!-- Columna Izquierda: Capítulos -->
+            <div class="menu-left-col">
+                
+                <!-- PARTE 1: NUESTRA HISTORIA -->
+                <div class="section-pill-tag part1">
+                    <span>PARTE 1: NUESTRA HISTORIA</span>
+                    <span>[6/6]</span>
+                </div>
+
+                <div class="quest-cards-list">
+                    <!-- Misión 1 -->
+                    <div class="quest-card active" data-id="1" data-part="1"
+                         data-title="CAPÍTULO #1: LAS ESCALERAS"
+                         data-img="assets/vane_puerta.jpg"
+                         data-desc="Recuerdo que en febrero de 2025 mi papá me llevó súper temprano a la U, y me senté a esperar en las escaleras de la entrada. Ahí llegaste tú, te sentaste unos escalones más abajo y tomaste tu teléfono abriste Genshin y empezaste a farmear un dominio. Yo estaba bien fokin nervioso pensando “¿le digo o no?”, hasta que por fin me llene de valentía y pregunté “¿qué AR eres?”. Te reíste, y yo pensé que era por cómo lo dije. Después entendí que simplemente no me habías escuchado bien. Y así empezó todo."
+                         data-reward="DESBLOQUEADO: Número telefónico + UID compartido">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #1] LAS ESCALERAS</span>
+                            <span class="q-title">Las Escaleras & "¿Qué AR eres?"</span>
+                        </div>
+                        <span class="q-badge">COMPLETADA</span>
+                    </div>
+
+                    <!-- Misión 2 -->
+                    <div class="quest-card" data-id="2" data-part="1"
+                         data-title="CAPÍTULO #2: LA CAJITA DE RECUERDOS"
+                         data-img="assets/collar_arbol.jpg"
+                         data-desc="cada detallito que nos regalamos nos hacia sentir que teníamos un baúl solo para coleccionar recuerdos. Tu primer regalo hacia mí fue el brownie mágico que me diste, recuerdo que al tiempo te di mi cadena del Poison Tree, mi favorita y no solo por X si no por ti. Después vinieron el carrito de Hot Wheels, la flor amarilla, la flor de Harry Potter, y la ropa mía que te regalaba. Eran detalles pequeños, pero para mí eran de los más importantes."
+                         data-reward="OBJETO RARO: Cadena Poison Tree + Brownie Mágico">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #2] EL BAÚL</span>
+                            <span class="q-title">La Cajita de Recuerdos</span>
+                        </div>
+                        <span class="q-badge">COMPLETADA</span>
+                    </div>
+
+                    <!-- Misión 3 -->
+                    <div class="quest-card" data-id="3" data-part="1"
+                         data-title="CAPÍTULO #3: MOMENTOS"
+                         data-img="assets/mlp_universidad.jpg"
+                         data-desc="Jugamos de todo: FNAF, Resident Evil, Free Fire, NFS, Brawl Stars. En la U nos sentábamos a ver peliculas, epic, my Little pony en el portátil, y a mí me encantaba verte tan feliz con Cadance y Shining Armor. Y en Genshin, Mi querida Pan, llegamos a más de 491 días seguidos. Yo ni siquiera jugaba tanto antes de conocerte y gracias a ti tengo una cuenta de la cual me siento orgulloso y no por el contenido si no porque me recuerda a ti."
+                         data-reward="LOGRO: 491 Días con Mi Querida Pan">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #3] MODO CO-OP</span>
+                            <span class="q-title">Momentos: Ponis & 491 Días</span>
+                        </div>
+                        <span class="q-badge">COMPLETADA</span>
+                    </div>
+
+                    <!-- Misión 4 -->
+                    <div class="quest-card" data-id="4" data-part="1"
+                         data-title="CAPÍTULO #4: EL DISFRAZ"
+                         data-img="assets/halloween_raven.jpg"
+                         data-desc="En Halloween fuiste Raven y yo fui Chico Bestia, y esa noche nos reímos un montón recuerdo que estaba nervioso con tu mamá y las fotos que nos tomo ese dia JAJAJA. y uno de mis recuerdos favoritos contigo fue la primera vez que fuimos al gym juntos, y tu te sentias como “el monte Everest no tiene nada en contra de mi”. ¿qué pasaba ahí? Una anécdota corta de ese día lo haría muy tu."
+                         data-reward="TRAJE ESPECIAL: Raven, Beast Boy & Gym">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #4] COSPLAY & GYM</span>
+                            <span class="q-title">El Disfraz & Modo Everest</span>
+                        </div>
+                        <span class="q-badge">COMPLETADA</span>
+                    </div>
+
+                    <!-- Misión 5 -->
+                    <div class="quest-card" data-id="5" data-part="1"
+                         data-title="CAPÍTULO #5: CARÁCTER"
+                         data-img="assets/peluches.jpg"
+                         data-desc="Con tus frases macabras, tus chistes rancios y tus delirios de asesina, yo sabía que en el fondo eras una niña atrapada en el cuerpo de una chica grande. recuerdo cuando hacíamos los trends de TikTok, mi favorito fue el de “Rock That Body” y a la vez el que más recuerdo. recuerdas la vez que hicimos la salchipapa juntos (yo hice la mayor parte, ni modo) y le falto queso AJAJJAA me encantó ese dia y si pudiera le diria a lucifer que me dejara en esa sala por el resto de mis dias... omg lucifer referencia increible."
+                         data-reward="ITEM: Trend Rock That Body + Salchipapa">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #5] BRAINROT & TRENDS</span>
+                            <span class="q-title">Carácter: Brainrot & Salchipapa</span>
+                        </div>
+                        <span class="q-badge">COMPLETADA</span>
+                    </div>
+
+                    <!-- Misión 6: FAVORITA -->
+                    <div class="quest-card" data-id="6" data-part="1"
+                         data-title="CAPÍTULO #6: MI RECUERDO FAVORITO"
+                         data-img="assets/torre_reloj.png"
+                         data-desc="Nunca quiero olvidar ese dia donde caminamos como unos locos pero nos teniamos el uno al otro, recuerdo que salimos de tu PDA hacia el centro y almorzamos frente a la universidad, ese dia me diste el cuadro y recuerdo que tenias sueño y sobretodo mucha calor, empezamos a pasear por el centro y nos quemamos bien feo JAJAJAJA pero fue sin duda el mejor dia de mi 2025, sin duda lo que mas salvaria yo de ese año fue haberte conocido y haber vivido tanto contigo, y puede que eso sea lo que me pesa pero el punto es darte a ver lo importante que eres no solo para mi sino para el mundo."
+                         data-reward="RECUERDO GUARDADO: Nuestro mejor día de 2025">
+                        <div class="q-info">
+                            <span class="q-sub">[CAPÍTULO #6] CARTAGENA</span>
+                            <span class="q-title">Mi Recuerdo Favorito</span>
+                        </div>
+                        <span class="q-badge fav">★ FAVORITA</span>
+                    </div>
+                </div>
+
+                <!-- PARTE 2: LO QUE QUIERO DECIRTE -->
+                <div class="section-pill-tag part2">
+                    <span>PARTE 2: LO QUE QUIERO DECIRTE</span>
+                    <span>[2/2]</span>
+                </div>
+
+                <div class="quest-cards-list">
+                    <!-- Misión 7 -->
+                    <div class="quest-card sober-card" data-id="7" data-part="2"
+                         data-title="CAPÍTULO 07: LO QUE NO TE DIJE"
+                         data-desc="cuando te terminé sabia que estaba cometiendo una estupidez. Quise corregir mis malos hábitos y entender por qué me sentía como me sentía, y en eso me aleje mucho de ti y para esa solo buscaba darle un tono diferente a mi vida, venia de una época donde pasaba encerrado, sin hablar con nadie más que contigo. y ahi fue justo cuando más me apoyabas y más te necesitaba, y como un imbecil te dejé ir. No fui sincero contigo sobre lo que sentía ni sobre lo que buscaba con eso, y me equivoqué muchas veces, te pido perdón una vez más y esta vez entendere si no lo haras, porque una disculpa no debe ser dicha para esperar que la otra persona la acepte si no para que note el arrepentimiento sincero que ella carga."
+                         data-reward="SINCERIDAD: Arrepentimiento genuino">
+                        <div class="q-info">
+                            <span class="q-sub">[MENSAJE 01] DESDE EL CORAZÓN</span>
+                            <span class="q-title">Lo Que No Te Dije</span>
+                        </div>
+                        <span class="q-badge sober">SINCERO</span>
+                    </div>
+
+                    <!-- Misión 8 -->
+                    <div class="quest-card sober-card" data-id="8" data-part="2"
+                         data-title="CAPÍTULO 08: LO MÁS IMPORTANTE"
+                         data-desc="Feliz cumpleaños, sheyla vanesa. No te escribo esto con el fin de volver a hablar o pretender hacer que nada paso, solo quiero decirte cosas que antes no pude... Cuida tus oídos, tus ojitos, y tus patitas, por favor no pierdas tu brillo. A diario le pido a Dios que te cuide, a tus padres, a Tego y Kanela, de Alana y los demás. Pase lo que pase de mi parte la pinky promise sigue en pie y cuando tú estés dispuesta ahí estaré, te quiero mucho jote."
+                         data-reward="PINKY PROMISE: En pie">
+                        <div class="q-info">
+                            <span class="q-sub">[MENSAJE 02] 14 DE OCTUBRE</span>
+                            <span class="q-title">Lo Más Importante</span>
+                        </div>
+                        <span class="q-badge sober">PROMESA</span>
+                    </div>
+                </div>
+
+                <!-- Botón especial: AL FINAL DE TODO -->
+                <div class="final-surprise-banner-box">
+                    <button class="btn-final-surprise" id="btnMenuFinalSurprise" onclick="openFinalSurprise()">
+                        🌹 AL FINAL DE TODO ✨
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Columna Derecha: Vista Previa Dinámica (Bottom Sheet en móvil) -->
+            <div class="menu-right-col">
+                <button class="mobile-preview-close" id="mobilePreviewClose" title="Cerrar vista previa">✕</button>
+
+                <!-- Botón flotante de Audio -->
+                <button class="floating-audio-btn" id="audioToggleBtn" title="Activar/Silenciar Música">
+                    <span class="audio-icon">♪</span>
+                    <span class="audio-label">AUDIO: ON</span>
+                </button>
+
+                <div class="preview-pane">
+                    <div class="preview-top">
+                        <span id="previewHeaderTitle">CAPÍTULO #1: LAS ESCALERAS</span>
+                        <span id="previewHeaderBadge" class="preview-badge-status" style="color: var(--pink-soft);">COMPLETADA</span>
+                    </div>
+
+                    <div class="preview-img-box">
+                        <img id="previewMediaImg" src="assets/vane_puerta.jpg" alt="Preview">
+                        <div id="previewSoberDialog" class="sober-preview-screen">
+                            <div class="sober-lock-icon">🔒</div>
+                            <div class="sober-title">CONTENIDO RESTRINGIDO: JOTE</div>
+                            <div class="sober-sub">¿Deseas continuar?</div>
+                        </div>
+                    </div>
+
+                    <div class="preview-bottom-actions">
+                        <div class="preview-reward-tag" id="previewRewardTag">
+                            ★ DESBLOQUEADO: Número telefónico + UID compartido
+                        </div>
+
+                        <button class="open-chapter-btn" id="btnEnterChapter">
+                            ▶ ACCEDER AL CAPÍTULO ◀
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backdrop para cerrar en móvil -->
+            <div class="mobile-preview-backdrop" id="mobilePreviewBackdrop"></div>
+
+        </section>
+
+        <!-- ==============================================================
+             3. INTERIOR DEL CAPÍTULO (ESCENARIO COMPLETO)
+             ============================================================== -->
+        <section class="stage-view" id="stage-chapter">
+            <div class="chapter-header-bar">
+                <button class="back-nav-btn" id="btnBackToNav">
+                    ◀ VOLVER AL MENÚ
+                </button>
+                <span class="chapter-title-tag" id="activeMissionHeader">
+                    MISIÓN 01: LAS ESCALERAS
+                </span>
+            </div>
+
+            <div class="chapter-body" id="chapterContentArea">
+                <!-- Inyectado dinámicamente -->
+            </div>
+        </section>
+
+        <!-- ==============================================================
+             PISTA DE PERSONAJES ANIMADOS
+             Cadance, Raven, Beast Boy, Mualani, Xiao
+             ============================================================== -->
+        <div class="sprites-track">
+            <img src="assets/cadance_sprite.png" alt="Cadance" class="floating-sprite" id="sprite-cadance" title="Princesa Cadance">
+            <img src="assets/raven_sprite.png" alt="Raven" class="floating-sprite" id="sprite-raven" title="Raven">
+            <img src="assets/beastboy_sprite.png" alt="Beast Boy" class="floating-sprite" id="sprite-beastboy" title="Chico Bestia">
+            <img src="assets/mualani_sprite.png" alt="Mualani" class="floating-sprite" id="sprite-mualani" title="Mualani">
+            <img src="assets/xiao_sprite.png" alt="Xiao" class="floating-sprite" id="sprite-xiao" title="Xiao">
+        </div>
+
+        <!-- Footer HUD -->
+        <footer class="game-footer">
+            <div>SISTEMA: <span>PARTIDA GUARDADA // 14 DE OCTUBRE</span></div>
+            <div>ESTADO: <span>MEMORIAS EN LÍNEA</span></div>
+        </footer>
+
+    </main>
+
+    <!-- Canvas de Confeti a pantalla completa -->
+    <canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 10001; display: none;"></canvas>
+
+    <!-- Modal "AL FINAL DE TODO" // Satoru Gojo + Feliz Cumpleeee -->
+    <div class="final-surprise-modal" id="finalSurpriseModal">
+        <div class="final-surprise-backdrop" onclick="closeFinalSurprise()"></div>
+        <div class="final-surprise-card">
+            <button class="final-surprise-close" onclick="closeFinalSurprise()" title="Cerrar">✕</button>
+            <div class="final-surprise-img-box">
+                <img src="assets/gojo_rosa.png" alt="Satoru Gojo con rosa">
+            </div>
+            <div class="final-surprise-badge">🎂 14 DE OCTUBRE // REGALO FINAL 🌹</div>
+            <h2 class="final-surprise-title">¡FELIZ CUMPLEEEE! 🎉</h2>
+            <p class="final-surprise-msg">
+                "disfruta de tu dia eres la mejor tqm.. boom 💥🌹"
+            </p>
+            <div class="final-surprise-buttons">
+                <button class="btn-more-confetti" onclick="launchConfettiBurst(130)">
+                    ✨ MÁS CONFETI 🎊
+                </button>
+                <button class="btn-close-surprise" onclick="closeFinalSurprise()">
+                    CERRAR
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Lightbox -->
+    <div class="image-lightbox" id="imageLightbox">
+        <button class="image-lightbox-close" id="lightboxCloseBtn">CERRAR [ESC]</button>
+        <img id="lightboxImg" src="" alt="Fullscreen">
+        <div class="image-lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Script de Interactividad, Secuencia Misteriosa y Control de Audio -->
+    <script>
+        // Audio Management
+        const bgm = document.getElementById('bgm');
+        let audioEnabled = true;
+        let bgmFadeTimer = null;
+        let selectedMissionId = 1;
+
+        function fadeAudio(targetVol, durationMs, onDone) {
+            if (bgmFadeTimer) clearInterval(bgmFadeTimer);
+            if (!audioEnabled) {
+                bgm.volume = 0;
+                bgm.pause();
+                if (onDone) onDone();
+                return;
+            }
+
+            const startVol = bgm.volume;
+            const startTime = performance.now();
+
+            if (targetVol > 0 && bgm.paused) {
+                bgm.play().catch(() => {});
+            }
+
+            bgmFadeTimer = setInterval(() => {
+                const elapsed = performance.now() - startTime;
+                const progress = Math.min(elapsed / durationMs, 1);
+                bgm.volume = Math.max(0, Math.min(1, startVol + (targetVol - startVol) * progress));
+
+                if (progress >= 1) {
+                    clearInterval(bgmFadeTimer);
+                    bgmFadeTimer = null;
+                    if (targetVol === 0) bgm.pause();
+                    if (onDone) onDone();
+                }
+            }, 50);
+        }
+
+        // SFX Generator
+        let audioCtx = null;
+        function playBeep(freq = 440, type = 'square', duration = 0.08) {
+            if (!audioEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Botón Audio ON/OFF
+        const audioToggleBtn = document.getElementById('audioToggleBtn');
+        audioToggleBtn.addEventListener('click', () => {
+            audioEnabled = !audioEnabled;
+            if (audioEnabled) {
+                audioToggleBtn.textContent = 'AUDIO: ON [♪]';
+                audioToggleBtn.style.color = 'var(--pink-soft)';
+                audioToggleBtn.style.borderColor = 'var(--pink-soft)';
+                if (selectedMissionId < 7) fadeAudio(0.3, 1000);
+                playBeep(520, 'square', 0.06);
+            } else {
+                audioToggleBtn.textContent = 'AUDIO: OFF [X]';
+                audioToggleBtn.style.color = 'var(--text-dim)';
+                audioToggleBtn.style.borderColor = 'var(--text-dim)';
+                fadeAudio(0, 300);
+            }
+        });
+
+        // ==============================================================
+        // SECUENCIA MISTERIOSA DE ENTRADA (PREGUNTAS INTERACTIVAS)
+        // ==============================================================
+        const stageIntro = document.getElementById('stage-intro');
+        const stageMenu = document.getElementById('stage-menu');
+        const stageChapter = document.getElementById('stage-chapter');
+
+        const stepCounter = document.getElementById('stepCounter');
+        const introTypewriter = document.getElementById('introTypewriter');
+        const btnIntroAction = document.getElementById('btnIntroAction');
+
+        const introSteps = [
+            {
+                step: '[01/04]',
+                text: '...¿Quién anda ahí?\n¿Qué estás buscando en esta noche de octubre?...',
+                button: 'Solo estaba curioseando...'
+            },
+            {
+                step: '[02/04]',
+                text: 'Este lugar ha estado en penumbra y silencio por mucho tiempo.\nNo deberías seguir avanzando.\n¿Qué esperas encontrar?...',
+                button: 'Quiero ver qué hay adentro.'
+            },
+            {
+                step: '[03/04]',
+                text: 'Advertencia: Los datos aquí guardados no se pueden borrar.\nContienen recuerdos de Teyvat, nuestras partidas juntos y una promesa que sigue en pie.\n¿Segura de continuar?...',
+                button: 'Sí, estoy lista.'
+            },
+            {
+                step: '[04/04]',
+                text: 'Detectando alma viajera...\n[UID: NYX-644252674]\nIdentidad confirmada: Liz Vanesa.\nHola, Pan. Feliz 14 de octubre.',
+                button: '▶ ACCEDER AL ARCHIVO ◀'
+            }
+        ];
+
+        let currentIntroStep = 0;
+
+        btnIntroAction.addEventListener('click', () => {
+            playBeep(480, 'square', 0.06);
+            currentIntroStep++;
+
+            if (currentIntroStep < introSteps.length) {
+                const s = introSteps[currentIntroStep];
+                stepCounter.textContent = s.step;
+                introTypewriter.textContent = s.text;
+                btnIntroAction.textContent = s.button;
+            } else {
+                // Termina la intro y abre el menú
+                playBeep(640, 'triangle', 0.2);
+                stageIntro.classList.add('dismissed');
+                setTimeout(() => {
+                    stageIntro.style.display = 'none';
+                }, 900);
+                stageMenu.classList.add('active');
+                // Iniciar música tras interacción
+                if (audioEnabled) {
+                    fadeAudio(0.3, 1500);
+                }
+            }
+        });
+
+        // ==============================================================
+        // MENÚ: SELECCIÓN Y AUDIO FADE
+        // ==============================================================
+        const questCards = document.querySelectorAll('.quest-card');
+        const previewHeaderTitle = document.getElementById('previewHeaderTitle');
+        const previewHeaderBadge = document.getElementById('previewHeaderBadge');
+        const previewMediaImg = document.getElementById('previewMediaImg');
+        const previewSoberDialog = document.getElementById('previewSoberDialog');
+        const previewRewardTag = document.getElementById('previewRewardTag');
+        const btnEnterChapter = document.getElementById('btnEnterChapter');
+        const activeMissionHeader = document.getElementById('activeMissionHeader');
+        const chapterContentArea = document.getElementById('chapterContentArea');
+        const btnBackToNav = document.getElementById('btnBackToNav');
+        const menuRightCol = document.querySelector('.menu-right-col');
+        const mobilePreviewClose = document.getElementById('mobilePreviewClose');
+        const mobilePreviewBackdrop = document.getElementById('mobilePreviewBackdrop');
+
+        function closeMobilePreview() {
+            if (menuRightCol) menuRightCol.classList.remove('mobile-active');
+            if (mobilePreviewBackdrop) mobilePreviewBackdrop.classList.remove('active');
+        }
+
+        if (mobilePreviewClose) mobilePreviewClose.addEventListener('click', closeMobilePreview);
+        if (mobilePreviewBackdrop) mobilePreviewBackdrop.addEventListener('click', closeMobilePreview);
+
+        questCards.forEach((card, idx) => {
+            card.addEventListener('mouseenter', () => playBeep(320 + idx * 30, 'square', 0.03));
+
+            card.addEventListener('click', () => {
+                questCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                playBeep(520, 'square', 0.05);
+
+                selectedMissionId = parseInt(card.dataset.id);
+                const isPart2 = card.dataset.part === '2';
+
+                previewHeaderTitle.textContent = card.dataset.title;
+                previewRewardTag.textContent = '★ ' + card.dataset.reward;
+
+                if (isPart2) {
+                    // Misiones 7 y 8: Fade out gradual a 0 en 2 segundos
+                    fadeAudio(0, 2000);
+                    previewMediaImg.style.display = 'none';
+                    previewSoberDialog.classList.add('active');
+                    previewHeaderBadge.textContent = 'SOBRIO';
+                    previewHeaderBadge.style.color = 'var(--pink-accent)';
+                    btnEnterChapter.textContent = '▶ ACCEDER AL MENSAJE ◀';
+                } else {
+                    // Misiones 1 a 6: Fade in a 0.3 en 1 segundo
+                    if (audioEnabled && bgm.volume < 0.3) {
+                        fadeAudio(0.3, 1000);
+                    }
+                    previewMediaImg.style.display = 'block';
+                    previewMediaImg.src = card.dataset.img;
+                    previewSoberDialog.classList.remove('active');
+                    previewHeaderBadge.textContent = card.dataset.id === '6' ? 'FAVORITA' : 'COMPLETADA';
+                    previewHeaderBadge.style.color = card.dataset.id === '6' ? 'var(--gold-accent)' : 'var(--pink-soft)';
+                    btnEnterChapter.textContent = '▶ ACCEDER AL CAPÍTULO ◀';
+                }
+
+                // En móvil, desplegar el Bottom Sheet de vista previa
+                if (window.innerWidth <= 768) {
+                    if (menuRightCol) menuRightCol.classList.add('mobile-active');
+                    if (mobilePreviewBackdrop) mobilePreviewBackdrop.classList.add('active');
+                }
+            });
+        });
+
+        // Entrar a Capítulo
+        btnEnterChapter.addEventListener('click', () => {
+            closeMobilePreview();
+            playBeep(600, 'triangle', 0.12);
+            stageMenu.classList.remove('active');
+            stageChapter.classList.add('active');
+            activeMissionHeader.textContent = previewHeaderTitle.textContent;
+            loadMissionChapter(selectedMissionId);
+        });
+
+        btnBackToNav.addEventListener('click', () => {
+            playBeep(400, 'square', 0.08);
+            // Pausar videos activos
+            const vids = chapterContentArea.querySelectorAll('video');
+            vids.forEach(v => v.pause());
+
+            stageChapter.classList.remove('active');
+            stageMenu.classList.add('active');
+
+            if (selectedMissionId < 7 && audioEnabled) {
+                fadeAudio(0.3, 1000);
+            }
+        });
+
+        // ==============================================================
+        // INYECCIÓN DE TODAS LAS FOTOS Y VIDEOS EN CADA CAPÍTULO
+        // ==============================================================
+        function loadMissionChapter(id) {
+            chapterContentArea.innerHTML = '';
+
+            if (id === 1) {
+                // CAPÍTULO #1: LAS ESCALERAS
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card">
+                        <span class="rpg-bubble-speaker">[ CAPÍTULO #1 • LAS ESCALERAS ]</span>
+                        <div class="rpg-bubble-text">
+                            "Recuerdo que en febrero de 2025 mi papá me llevó súper temprano a la U, y me senté a esperar en las escaleras de la entrada. Ahí llegaste tú, te sentaste unos escalones más abajo y tomaste tu teléfono abriste Genshin y empezaste a farmear un dominio. Yo estaba bien fokin nervioso pensando “¿le digo o no?”, hasta que por fin me llene de valentía y pregunté “¿qué AR eres?”. Te reíste, y yo pensé que era por cómo lo dije. Después entendí que simplemente no me habías escuchado bien. Y así empezó todo."
+                        </div>
+                    </div>
+                    <div class="media-masonry">
+                        <div class="media-item-card">
+                            <img src="assets/vane_puerta.jpg" alt="Liz en Cartagena">
+                            <div class="media-item-caption">Liz en Cartagena ✨</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/estudiando_u.jpg" alt="Estudiando en Comfenalco">
+                            <div class="media-item-caption">Estudiando en la U</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/vane_tienda.jpg" alt="Liz en la tienda">
+                            <div class="media-item-caption">Espacio Femenino • Labios 💄</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/genshin_furina.jpg" alt="Furina Co-op">
+                            <div class="media-item-caption">Co-op en Teyvat con Furina</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/genshin_saurian.jpg" alt="Criaturas de Teyvat">
+                            <div class="media-item-caption">Criaturas y Dominios de Teyvat</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/mualani_portada.jpg" alt="Mualani Natlan">
+                            <div class="media-item-caption">Mualani en Natlan</div>
+                        </div>
+                    </div>
+                `;
+            } else if (id === 2) {
+                // CAPÍTULO #2: LA CAJITA DE RECUERDOS (INVENTARIO)
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card">
+                        <span class="rpg-bubble-speaker">[ CAPÍTULO #2 • LA CAJITA DE RECUERDOS ]</span>
+                        <div class="rpg-bubble-text">
+                            "cada detallito que nos regalamos nos hacia sentir que teníamos un baúl solo para coleccionar recuerdos. Tu primer regalo hacia mí fue el brownie mágico que me diste, recuerdo que al tiempo te di mi cadena del Poison Tree, mi favorita y no solo por X si no por ti. Después vinieron el carrito de Hot Wheels, la flor amarilla, la flor de Harry Potter, y la ropa mía que te regalaba. Eran detalles pequeños, pero para mí eran de los más importantes."
+                        </div>
+                    </div>
+                    <div class="inv-grid-container" id="inventoryGrid">
+                        <div class="inv-card-slot active" data-title="Brownie Mágico" data-img="assets/collar_arbol.jpg" data-lore="Tu primer regalo hacia mí fue el brownie mágico que me diste.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🍫</div>
+                            <span class="slot-name">Brownie</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Cadena Poison Tree" data-img="assets/collar_arbol.jpg" data-lore="Mi favorita y no solo por X sino por ti. La llevaste en tantas fotos y paseos con tanto cariño.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🌳</div>
+                            <span class="slot-name">Poison Tree</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Top Lavanda" data-img="assets/top_lavanda.jpg" data-lore="Tu color favorito (morado/lavanda). Hermosa con tu collar y tu sonrisa.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">💜</div>
+                            <span class="slot-name">Lavanda</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Bonifacio" data-img="assets/bg_pixel_pets.png" data-lore="El conejito morado más consentido y fiel de la partida.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🐰</div>
+                            <span class="slot-name">Bonifacio</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Doki Loki" data-img="assets/repisa_peluches.jpg" data-lore="La vaquita tierna que nos acompaña siempre con su carita alegre.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🐮</div>
+                            <span class="slot-name">Doki Loki</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Lienzos" data-img="assets/baki_drawing.png" data-lore="Lienzos llenos de creatividad, arte, dibujos y momentos únicos.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">🎨</div>
+                            <span class="slot-name">Lienzos</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Pancho" data-img="assets/bg_pixel_pets.png" data-lore="Pancho, compañero fiel de aventuras y lealtad incondicional.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">🐕</div>
+                            <span class="slot-name">Pancho</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Kanelita" data-img="assets/peluches.jpg" data-lore="Perrita color canela, tierna, juguetona y muy consentida.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🐶</div>
+                            <span class="slot-name">Kanelita</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Lyney" data-img="assets/genshin_recap.jpg" data-lore="El gran mago de Fontaine en Genshin. ¡Puro show y magia en Teyvat!">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">🎩</div>
+                            <span class="slot-name">Lyney</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Kanela Kemada" data-img="assets/peluches.jpg" data-lore="Tego y su flow oscuro, el perrito negro más querido de la casa.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">🐾</div>
+                            <span class="slot-name">Kanela Kemada</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Carrito Hot Wheels & Flores" data-img="assets/repisa_peluches.jpg" data-lore="El carrito Hot Wheels, la flor amarilla y la flor de Harry Potter en el baúl.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">🏎️</div>
+                            <span class="slot-name">Hot Wheels</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Hello Kitty Costeña" data-img="assets/cumple_hellokitty.jpg" data-lore="Hello Kitty con sombrero vueltiao en tu cumpleaños.">
+                            <span class="slot-stars">★★★★</span>
+                            <div class="slot-emoji">🎀</div>
+                            <span class="slot-name">Hello Kitty</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Calcetines Pata de Pollo" data-img="assets/may_collage.jpg" data-lore="De los Six Pics of May: calcetines divertidos y risas.">
+                            <span class="slot-stars">★★★</span>
+                            <div class="slot-emoji">🧦</div>
+                            <span class="slot-name">Pata Pollo</span>
+                        </div>
+                        <div class="inv-card-slot" data-title="Polaroid de los Nenes" data-img="assets/polaroid_nenes.jpg" data-lore="El baúl solo para coleccionar recuerdos de los dos.">
+                            <span class="slot-stars">★★★★★</span>
+                            <div class="slot-emoji">📸</div>
+                            <span class="slot-name">Polaroid</span>
+                        </div>
+                    </div>
+                    <div class="inspect-card-box" id="inspectCard">
+                        <img src="assets/collar_arbol.jpg" alt="Inspect" id="inspectCardImg">
+                        <div class="inspect-info">
+                            <div class="inspect-title" id="inspectCardTitle">Brownie Mágico ★★★★★</div>
+                            <div class="inspect-story" id="inspectCardLore">Tu primer regalo hacia mí fue el brownie mágico que me diste.</div>
+                        </div>
+                    </div>
+                `;
+
+                const slots = chapterContentArea.querySelectorAll('.inv-card-slot');
+                const iImg = document.getElementById('inspectCardImg');
+                const iTitle = document.getElementById('inspectCardTitle');
+                const iLore = document.getElementById('inspectCardLore');
+
+                slots.forEach(s => {
+                    s.addEventListener('click', () => {
+                        slots.forEach(sl => sl.classList.remove('active'));
+                        s.classList.add('active');
+                        playBeep(480, 'square', 0.05);
+                        iImg.src = s.dataset.img;
+                        iTitle.textContent = s.dataset.title + ' ' + (s.querySelector('.slot-stars').textContent);
+                        iLore.textContent = s.dataset.lore;
+                    });
+                });
+            } else if (id === 3) {
+                // CAPÍTULO #3: MOMENTOS
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card">
+                        <span class="rpg-bubble-speaker">[ CAPÍTULO #3 • MOMENTOS ]</span>
+                        <div class="rpg-bubble-text">
+                            "Jugamos de todo: FNAF, Resident Evil, Free Fire, NFS, Brawl Stars. En la U nos sentábamos a ver peliculas, epic, my Little pony en el portátil, y a mí me encantaba verte tan feliz con Cadance y Shining Armor. Y en Genshin, Mi querida Pan, llegamos a más de 491 días seguidos. Yo ni siquiera jugaba tanto antes de conocerte y gracias a ti tengo una cuenta de la cual me siento orgulloso y no por el contenido si no porque me recuerda a ti."
+                        </div>
+                    </div>
+                    <div class="media-masonry">
+                        <div class="media-item-card">
+                            <img src="assets/mlp_universidad.jpg" alt="Ponis en la U">
+                            <div class="media-item-caption">Cadance y Shining Armor en el portátil</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/genshin_recap.jpg" alt="491 Días Co-op">
+                            <div class="media-item-caption">491 días seguidos con mi querida Pan</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/acta_mlp.png" alt="Acta de Amistad MLP">
+                            <div class="media-item-caption">Acta de Magia y Amistad MLP</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/minecraft_pinguino.png" alt="Minecraft">
+                            <div class="media-item-caption">Pingüino morado y lobito en Minecraft</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/gta_kiss.png" alt="GTA Kiss">
+                            <div class="media-item-caption">GTA San Andreas: Momento gamer juntos</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/gta_rifle.png" alt="GTA Sniper">
+                            <div class="media-item-caption">GTA: Dúo dinámico</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/bg_mlp_epic.png" alt="Pelicula Epic">
+                            <div class="media-item-caption">Película Epic y series en la U</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/bg_genshin.png" alt="Teyvat Fondo">
+                            <div class="media-item-caption">Noches de farmeo en Teyvat</div>
+                        </div>
+                    </div>
+                `;
+            } else if (id === 4) {
+                // CAPÍTULO #4: EL DISFRAZ
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card">
+                        <span class="rpg-bubble-speaker">[ CAPÍTULO #4 • EL DISFRAZ ]</span>
+                        <div class="rpg-bubble-text">
+                            "En Halloween fuiste Raven y yo fui Chico Bestia, y esa noche nos reímos un montón recuerdo que estaba nervioso con tu mamá y las fotos que nos tomo ese dia JAJAJA. y uno de mis recuerdos favoritos contigo fue la primera vez que fuimos al gym juntos, y tu te sentias como “el monte Everest no tiene nada en contra de mi”. ¿qué pasaba ahí? Una anécdota corta de ese día lo haría muy tu."
+                        </div>
+                    </div>
+                    <div class="media-masonry">
+                        <div class="media-item-card">
+                            <img src="assets/halloween_raven.jpg" alt="Raven y Beast Boy">
+                            <div class="media-item-caption">Raven & Chico Bestia 💜💚</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/halloween_terraza.jpg" alt="Fotos en la terraza">
+                            <div class="media-item-caption">Nervioso con tu mamá y las fotos JAJAJA</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/gym_collage.jpg" alt="Gym Collage">
+                            <div class="media-item-caption">"El monte Everest no tiene nada contra mí"</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/baki_drawing.png" alt="Dibujo Baki">
+                            <div class="media-item-caption">Entrenando estilo Baki Hanma</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/cartoon_buff.png" alt="Buff Caricatura">
+                            <div class="media-item-caption">Nuestra versión musculosa</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/juntos_sonriendo.jpg" alt="Juntos sonriendo">
+                            <div class="media-item-caption">Sonrisas y complicidad</div>
+                        </div>
+                    </div>
+                `;
+            } else if (id === 5) {
+                // CAPÍTULO #5: CARÁCTER
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card">
+                        <span class="rpg-bubble-speaker">[ CAPÍTULO #5 • CARÁCTER ]</span>
+                        <div class="rpg-bubble-text">
+                            "Con tus frases macabras, tus chistes rancios y tus delirios de asesina, yo sabía que en el fondo eras una niña atrapada en el cuerpo de una chica grande. recuerdo cuando hacíamos los trends de TikTok, mi favorito fue el de “Rock That Body” y a la vez el que más recuerdo. recuerdas la vez que hicimos la salchipapa juntos (yo hice la mayor parte, ni modo) y le falto queso AJAJJAA me encantó ese dia y si pudiera le diria a lucifer que me dejara en esa sala por el resto de mis dias... omg lucifer referencia increible."
+                        </div>
+                    </div>
+                    <div class="media-masonry">
+                        <div class="media-item-card">
+                            <video src="assets/video_brainrot.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: Brainrot Pop • Risas en el suelo</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_baile_salon.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Trend de TikTok</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_girlfriendholic.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: Trend Girlfriendholic • Besitos</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_stitch_abrazo.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: Stitch • Abrazo con sueño</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_cantando_u.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: Cantando en el pasillo</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/carro_lengua.jpg" alt="Muecas sacando lengua">
+                            <div class="media-item-caption">Muecas sacando la lengua 😜</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/carro_lengua_extra.jpg" alt="Carro lengua extra">
+                            <div class="media-item-caption">Risas en el carro</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/carro_sonriendo.jpg" alt="El día de mi cumpleaños">
+                            <div class="media-item-caption">El día de mi cumpleaños</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/carro_selfie_extra.jpg" alt="Carro selfie">
+                            <div class="media-item-caption">Selfies de copiloto</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/con_el_nino.jpg" alt="Trend con IA">
+                            <div class="media-item-caption">Trend con IA</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/peanuts_cartoon.jpg" alt="Peanuts cartoon">
+                            <div class="media-item-caption">Caricatura estilo Peanuts</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/selfies_collage.jpg" alt="Selfies collage">
+                            <div class="media-item-caption">Tus caritas y chistes rancios</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/selfies_gafas.jpg" alt="Selfies con gafas">
+                            <div class="media-item-caption">Con gafas y delirios de asesina</div>
+                        </div>
+                    </div>
+                `;
+                bindVideoEvents();
+            } else if (id === 6) {
+                // CAPÍTULO #6: MI RECUERDO FAVORITO (★ FAVORITA)
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card" style="border-color: var(--gold-accent);">
+                        <span class="rpg-bubble-speaker" style="border-color: var(--gold-accent); color: var(--gold-accent);">[ CAPÍTULO #6 • MI RECUERDO FAVORITO ]</span>
+                        <div class="rpg-bubble-text">
+                            "Nunca quiero olvidar ese dia donde caminamos como unos locos pero nos teniamos el uno al otro, recuerdo que salimos de tu PDA hacia el centro y almorzamos frente a la universidad, ese dia me diste el cuadro y recuerdo que tenias sueño y sobretodo mucha calor, empezamos a pasear por el centro y nos quemamos bien feo JAJAJAJA pero fue sin duda el mejor dia de mi 2025, sin duda lo que mas salvaria yo de ese año fue haberte conocido y haber vivido tanto contigo, y puede que eso sea lo que me pesa pero el punto es darte a ver lo importante que eres no solo para mi sino para el mundo."
+                        </div>
+                    </div>
+                    <div class="media-masonry">
+                        <div class="media-item-card" style="border-color: var(--gold-accent);">
+                            <img src="assets/torre_reloj.png" alt="Torre del Reloj">
+                            <div class="media-item-caption">Bajo la Torre del Reloj iluminada 💜</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/vane_torre_sola.jpg" alt="Liz en la Torre">
+                            <div class="media-item-caption">Liz en la Torre del Reloj</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_october.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: We Fell In Love In October</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_pretty_girl.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: En la librería • Pretty Girl</div>
+                        </div>
+                        <div class="media-item-card">
+                            <video src="assets/video_blue_ojos.mp4" controls preload="metadata"></video>
+                            <div class="media-item-caption">Video: Ojos y rizos • Blue</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/recuerdo_copa.jpg" alt="Recuerdos">
+                            <div class="media-item-caption">Recuerdos: Hoy hace un año</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/cumple_corona.jpg" alt="Corona de cumple">
+                            <div class="media-item-caption">Tu corona de cumpleaños ✨</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/gorrito_cumple.jpg" alt="Gorrito de cumple">
+                            <div class="media-item-caption">Celebrando tu vida 🎂</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/bebe_vestido_rojo.jpg" alt="Liz chiquita vestido rojo">
+                            <div class="media-item-caption">Liz chiquita con vestido rojo</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/bebe_mama.jpg" alt="Liz bebé en brazos">
+                            <div class="media-item-caption">Liz bebé en brazos de mamá</div>
+                        </div>
+                        <div class="media-item-card">
+                            <img src="assets/bebe_playa.jpg" alt="Liz en la playa">
+                            <div class="media-item-caption">Liz chiquita en la playa</div>
+                        </div>
+                    </div>
+                `;
+                bindVideoEvents();
+            } else if (id === 7) {
+                // CAPÍTULO 07: LO QUE NO TE DIJE (SOBRIO)
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card" style="border-color: #f43f5e; background: #18081f;">
+                        <span class="rpg-bubble-speaker" style="border-color: #f43f5e; color: #f43f5e;">[ CAPÍTULO 07 • LO QUE NO TE DIJE ]</span>
+                        <div class="rpg-bubble-text" style="font-size: 1.15rem; line-height: 1.75;">
+                            <p style="margin-bottom: 16px;">
+                                "cuando te terminé sabia que estaba cometiendo una estupidez. Quise corregir mis malos hábitos y entender por qué me sentía como me sentía, y en eso me aleje mucho de ti y para esa solo buscaba darle un tono diferente a mi vida, venia de una época donde pasaba encerrado, sin hablar con nadie más que contigo. y ahi fue justo cuando más me apoyabas y más te necesitaba, y como un imbecil te dejé ir."
+                            </p>
+                            <p>
+                                "No fui sincero contigo sobre lo que sentía ni sobre lo que buscaba con eso, y me equivoqué muchas veces, te pido perdón una vez más y esta vez entendere si no lo haras, porque una disculpa no debe ser dicha para esperar que la otra persona la acepte si no para que note el arrepentimiento sincero que ella carga."
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else if (id === 8) {
+                // CAPÍTULO 08: LO MÁS IMPORTANTE (SOBRIO / FINAL)
+                chapterContentArea.innerHTML = `
+                    <div class="rpg-bubble-card" style="border-color: var(--pink-soft); background: #18081f;">
+                        <span class="rpg-bubble-speaker" style="border-color: var(--pink-soft); color: var(--pink-soft);">[ CAPÍTULO 08 • LO MÁS IMPORTANTE ]</span>
+                        <div class="rpg-bubble-text" style="font-size: 1.15rem; line-height: 1.75;">
+                            <p style="margin-bottom: 16px;">
+                                "Feliz cumpleaños, sheyla vanesa. No te escribo esto con el fin de volver a hablar o pretender hacer que nada paso, solo quiero decirte cosas que antes no pude, por miedo o porque no era el momento. No te desmerites cuando las cosas se pongan feas: eres muy inteligente y muy capaz, y todo se hace con calma. Cuida tus oídos, tus ojitos, y tus patitaspor favor no pierdas tu brillo ten presente siempre que directa o indirectamente siempre estare pendiente de ti, eres muy especial para mi y la verdad haberte conocido fue lo mejor que me paso, prefiero mantener la distancia por si ya estas saliendo o hablando con alguien la verdad no quiero que tengas ningun problema porque lo entiendo y lo respeto, soy muy maduro por ese lado y te deseo que seas muy feliz, cumplas todas tus metas, sueños y promesas."
+                            </p>
+                            <p style="margin-bottom: 16px;">
+                                "a diario le pido a Dios que te cuide porque si es cierto que te pienso a diario te recuerdo casi a cada hora y es algo que aun no he podido corregir, quizas porque se siente bonito recordar lo vivido o porque fue la mejor relacion que nunca habia vivido, solo le pido que te guarde, que cuide mucho a tus padres les de mucha vida y salud para que te sigan apoyando en tu trayecto, que cuide de tego y kanela, de alana y los demas disculpa si no fui muy tecnico en esto pero trate de hacerlo lo mas mi estilo, la verdad es que llevo haciendo esto bastante tiempo y quiero que te sientas orgullosa de ti asi como yo lo estoy."
+                            </p>
+                            <p style="margin-bottom: 8px;">
+                                "por ultimo quiero que sepas que pase lo que pase de mi parte la pinky promise sigue en pie y que cuando tu estes dispuesta ahi estare, te quiero mucho jote."
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Coordinar videos con BGM
+        function bindVideoEvents() {
+            const vids = chapterContentArea.querySelectorAll('video');
+            vids.forEach(v => {
+                v.addEventListener('play', () => {
+                    if (!bgm.paused) bgm.pause();
+                });
+                v.addEventListener('pause', () => {
+                    if (audioEnabled && selectedMissionId < 7) fadeAudio(0.3, 800);
+                });
+                v.addEventListener('ended', () => {
+                    if (audioEnabled && selectedMissionId < 7) fadeAudio(0.3, 800);
+                });
+            });
+        }
+
+        // Click en los sprites para hacer un sonido suave
+        document.querySelectorAll('.floating-sprite').forEach(s => {
+            s.addEventListener('click', () => playBeep(620, 'triangle', 0.1));
+        });
+
+        // Lightbox para fotos
+        function initLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const closeBtn = document.getElementById('lightboxCloseBtn');
+
+            document.addEventListener('click', (e) => {
+                const img = e.target.closest('.media-item-card img, .inspect-card-box img, .preview-img-box img');
+                if (img && !img.closest('.sober-preview-screen')) {
+                    lightboxImg.src = img.src;
+                    const captionEl = img.parentElement.querySelector('.media-item-caption, .inspect-title');
+                    lightboxCaption.textContent = captionEl ? captionEl.textContent : '';
+                    lightbox.classList.add('active');
+                    playBeep(520, 'square', 0.05);
+                }
+            });
+
+            closeBtn.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+            });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) lightbox.classList.remove('active');
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') lightbox.classList.remove('active');
+            });
+        }
+
+        // ==============================================================
+        // MOTOR DE CONFETI Y MODAL "AL FINAL DE TODO"
+        // ==============================================================
+        let confettiParticles = [];
+        let confettiAnimId = null;
+
+        function getConfettiContext() {
+            const canvas = document.getElementById('confettiCanvas');
+            if (!canvas) return null;
+            return canvas.getContext('2d');
+        }
+
+        function resizeConfettiCanvas() {
+            const canvas = document.getElementById('confettiCanvas');
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        }
+        window.addEventListener('resize', resizeConfettiCanvas);
+
+        const CONFETTI_COLORS = ['#f43f5e', '#ec4899', '#a855f7', '#8b5cf6', '#fbbf24', '#38bdf8', '#34d399', '#ffffff'];
+
+        class ConfettiParticle {
+            constructor(x, y) {
+                const canvas = document.getElementById('confettiCanvas');
+                const w = canvas ? canvas.width : window.innerWidth;
+                const h = canvas ? canvas.height : window.innerHeight;
+                this.x = x !== undefined ? x : Math.random() * w;
+                this.y = y !== undefined ? y : Math.random() * (h * 0.3) - 50;
+                this.size = Math.random() * 8 + 6;
+                this.color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+                this.vx = (Math.random() - 0.5) * 8;
+                this.vy = Math.random() * 4 + 2;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
+                this.wobble = Math.random() * 10;
+                this.wobbleSpeed = Math.random() * 0.1 + 0.05;
+                this.shape = Math.random() > 0.3 ? 'rect' : 'circle';
+            }
+
+            update() {
+                const canvas = document.getElementById('confettiCanvas');
+                const w = canvas ? canvas.width : window.innerWidth;
+                const h = canvas ? canvas.height : window.innerHeight;
+
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.08;
+                this.vx *= 0.99;
+                this.rotation += this.rotationSpeed;
+                this.wobble += this.wobbleSpeed;
+
+                if (this.y > h + 20) {
+                    this.y = -20;
+                    this.x = Math.random() * w;
+                    this.vy = Math.random() * 3 + 2;
+                }
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x + Math.sin(this.wobble) * 4, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+                if (this.shape === 'rect') {
+                    ctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 2);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size / 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function launchConfettiBurst(count = 140) {
+            const canvas = document.getElementById('confettiCanvas');
+            if (!canvas) return;
+            resizeConfettiCanvas();
+            canvas.style.display = 'block';
+            for (let i = 0; i < count; i++) {
+                const p = new ConfettiParticle(canvas.width / 2 + (Math.random() - 0.5) * 200, canvas.height * 0.45);
+                p.vx = (Math.random() - 0.5) * 22;
+                p.vy = (Math.random() - 0.8) * 18;
+                confettiParticles.push(p);
+            }
+            if (!confettiAnimId) {
+                animateConfetti();
+            }
+        }
+
+        function animateConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = getConfettiContext();
+            if (!canvas || !ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < confettiParticles.length; i++) {
+                confettiParticles[i].update();
+                confettiParticles[i].draw(ctx);
+            }
+            confettiAnimId = requestAnimationFrame(animateConfetti);
+        }
+
+        function playCelebrationFanfare() {
+            if (!audioEnabled) return;
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            notes.forEach((freq, idx) => {
+                setTimeout(() => {
+                    playBeep(freq, 'triangle', 0.25);
+                }, idx * 130);
+            });
+        }
+
+        function openFinalSurprise() {
+            const modal = document.getElementById('finalSurpriseModal');
+            if (modal) modal.classList.add('active');
+            playCelebrationFanfare();
+            launchConfettiBurst(160);
+        }
+
+        function closeFinalSurprise() {
+            const modal = document.getElementById('finalSurpriseModal');
+            if (modal) modal.classList.remove('active');
+            setTimeout(() => {
+                confettiParticles = [];
+                if (confettiAnimId) {
+                    cancelAnimationFrame(confettiAnimId);
+                    confettiAnimId = null;
+                }
+                const canvas = document.getElementById('confettiCanvas');
+                const ctx = getConfettiContext();
+                if (ctx && canvas) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'none';
+                }
+            }, 300);
+        }
+
+        initLightbox();
+    </script>
+</body>
+</html>
